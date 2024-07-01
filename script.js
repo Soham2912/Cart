@@ -15,9 +15,11 @@ var popular = [
  
 ]
 
+var cart =[];
+
 function addProd(){
     let cltr="";
-products.forEach(element => {
+products.forEach(function(element,index){
     cltr += ` <div class="product w-fit rounded-xl p-2 bg-white">
                 <div class="image w-[14rem] h-[13rem] bg-zinc-200 rounded-xl overflow">
                 <img class="w-full h-full object-cover" src="${element.image}" />
@@ -29,8 +31,8 @@ products.forEach(element => {
                             <h3 class="font-semibold opacity-20">${element.headLine}</h3>
                             <h4 class="font-semibold mt-2">₹${element.price}</h4>
                         </div>
-                        <button class="w-10 h-10 rounded-full shader text-yellow-400"><i
-                                class="ri-add-line"></i></button>
+                        <button data-index="${index}" class="add w-10 h-10 rounded-full shader text-yellow-400"><i
+                             data-index="${index}"   class="ri-add-line"></i></button>
                     </div>
                 </div>
             </div>`;
@@ -63,6 +65,16 @@ function addPop(){
 }
 
 
+function addToCart(){
+    //Event Bubbling
+    document.querySelector(".products").addEventListener("click",function(){
+        if(details.target.classList.contains('add')){
+            
+        }
+    })
+
+}
 
 addPop();
 addProd();
+addToCart();
