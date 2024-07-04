@@ -32,7 +32,7 @@ products.forEach(function(element,index){
                             <h4 class="font-semibold mt-2">₹${element.price}</h4>
                         </div>
                         <button data-index="${index}" class="add w-10 h-10 rounded-full shader text-yellow-400"><i
-                             data-index="${index}"   class="ri-add-line"></i></button>
+                             data-index="${index}"   class="add ri-add-line"></i></button>
                     </div>
                 </div>
             </div>`;
@@ -67,14 +67,37 @@ function addPop(){
 
 function addToCart(){
     //Event Bubbling
-    document.querySelector(".products").addEventListener("click",function(){
+    document.querySelector(".products").addEventListener("click",function(details){
         if(details.target.classList.contains('add')){
-            
+            cart.push(products[details.target.dataset.index]);
+            //console.log(cart);
         }
     })
+
+}
+
+
+function showCart(){
+    document.querySelector(".carticon").addEventListener("click",function(){
+        document.querySelector(".cartexpnd").style.display="block";
+        let cartCnt="";
+        cart.forEach(function(prod){
+            cartCnt+=` <div class="flex gap-2 bg-white p-2 rounded-lg">
+                    <div class="w-10 h-10 flex-shrink-0 rounded-lg overflow-hidden">
+                    <img class="w-full h-full object-cover" src=${prod.image}/>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold">${prod.name}</h3>
+                        <p class="text-sm font-semibold opacity-80">${prod.price}</p>
+                    </div>
+                </div>`        })
+        document.querySelector(".cartexpnd").innerHTML=cartCnt;
+
+    });
 
 }
 
 addPop();
 addProd();
 addToCart();
+showCart();
